@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Plans | INDU ELITE FITNESS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .plans-hero {
+      position: relative;
+      min-height: 235px;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid rgba(198,166,107,.25);
+      border-radius: 14px;
+      background: #1b2a20;
+    }
+    .plans-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .plans-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,rgba(10,17,12,.96),rgba(10,17,12,.67) 55%,rgba(10,17,12,.12));
+    }
+    .plans-hero-copy { position: relative; z-index: 1; max-width: 480px; }
+    .plans-hero h2 {
+      margin: 9px 0;
+      font: 500 clamp(31px,4vw,44px)/1.15 "Playfair Display",serif;
+    }
+    .plans-hero p { max-width: 410px; color: #d1d9d0; }
+    .plan-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 30px 0 18px;
+    }
+    .plan-intro h2 {
+      margin: 4px 0 0;
+      font: 500 28px "Playfair Display",serif;
+    }
+    .plan-intro p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .plan-catalog {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 17px;
+    }
+    .plan-card {
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      background: #18221c;
+      border: 1px solid rgba(246,241,231,.11);
+      border-radius: 12px;
+      transition: transform .2s,border-color .2s;
+    }
+    .plan-card:hover { transform: translateY(-4px); border-color: rgba(184,228,163,.38); }
+    .plan-card.featured { border-color: rgba(198,166,107,.65); }
+    .plan-card > img { width: 100%; height: 155px; object-fit: cover; }
+    .plan-card-body { padding: 19px; }
+    .plan-label {
+      display: inline-block;
+      margin-bottom: 9px;
+      padding: 4px 8px;
+      color: var(--green);
+      background: #25362a;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .featured .plan-label { color: var(--gold); background: #382f20; }
+    .plan-card h3 { margin: 0; font: 500 24px "Playfair Display",serif; }
+    .plan-price { margin: 13px 0 2px; color: var(--green); font-size: 29px; font-weight: 700; }
+    .plan-duration { color: var(--muted); font-size: 11px; }
+    .plan-description { min-height: 45px; margin: 15px 0; color: #bdc8bd; font-size: 12px; }
+    .plan-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 13px;
+      border-top: 1px solid var(--border);
+    }
+    .plan-card-footer small { color: var(--muted); font-size: 10px; }
+    .plan-actions { display: flex; gap: 6px; }
+    .plan-action {
+      padding: 7px 9px;
+      color: var(--green);
+      background: #25352a;
+      border: 1px solid #3c5140;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .plan-action.delete { color: #ffb9ab; background: #382521; border-color: #5b3730; }
+    .plan-workspace {
+      display: grid;
+      grid-template-columns: minmax(0,1.35fr) minmax(280px,.65fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 30px;
+    }
+    .plan-workspace .panel { min-width: 0; }
+    .plan-workspace h2 { font: 500 25px "Playfair Display",serif; }
+    .plan-form { display: grid; gap: 2px; }
+    .plan-form .form-group textarea { resize: vertical; min-height: 90px; }
+    .plan-message {
+      margin-top: 15px;
+      padding: 12px 14px;
+      border-radius: 7px;
+      font-size: 12px;
+    }
+    .plan-message.success { color: var(--green); background: #203629; border: 1px solid #365b40; }
+    .plan-message.error { color: #ffc0b2; background: #382521; border: 1px solid #684137; }
+    .plan-message[hidden] { display: none; }
+    .plan-table-panel { margin-top: 25px; padding: 0; overflow: hidden; }
+    .plan-table-heading { padding: 19px 20px; }
+    .plan-table-heading h2 { margin: 0; font: 500 24px "Playfair Display",serif; }
+    .plan-table-heading p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+    .plan-count { color: var(--muted); font-size: 11px; }
+    @media(max-width:1050px) {
+      .plan-catalog { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .plan-workspace { grid-template-columns: 1fr; }
+    }
+    @media(max-width:600px) {
+      .plans-hero { min-height: 215px; padding: 19px; }
+      .plan-catalog { grid-template-columns: 1fr; }
+      .plan-card > img { height: 180px; }
+      .plan-description { min-height: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-mark">IE</span>
+        <span><strong>INDU ELITE</strong><small>FITNESS CLUB</small></span>
+      </a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-links">
+        <a class="nav-link" href="/">▦ &nbsp; Dashboard</a>
+        <a class="nav-link" href="/members.html">♙ &nbsp; Members</a>
+        <a class="nav-link active" href="/plans.html">✦ &nbsp; Membership Plans</a>
+        <a class="nav-link" href="/subscriptions.html">▤ &nbsp; Subscriptions</a>
+        <a class="nav-link" href="/trainers.html">♧ &nbsp; Trainers</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-mini"><span class="status-dot"></span><div><strong>System Online</strong><small>Gym management portal</small></div></div>
+        <p>STRENGTH · DISCIPLINE · EXCELLENCE</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">INDU ELITE FITNESS / MEMBERSHIPS</p><h1>Membership Plans</h1></div>
+        <a href="/" class="text-link">← Dashboard</a>
+      </header>
+
+      <section class="plans-hero">
+        <img src="/images/gym-equipment.jpg" alt="Premium fitness equipment">
+        <div class="plans-hero-copy">
+          <span class="hero-tag">FIND YOUR LEVEL</span>
+          <h2>Invest in your strength.</h2>
+          <p>Flexible membership packages designed for every fitness journey. Manage pricing and durations from one place.</p>
+        </div>
+      </section>
+
+      <div id="planMessage" class="plan-message" role="status" aria-live="polite" hidden></div>
+
+      <section class="plan-intro">
+        <div><p class="eyebrow">THE MEMBERSHIP COLLECTION</p><h2>Choose your commitment</h2><p>All available plans from your club database.</p></div>
+        <span id="planCount" class="plan-count">Loading plans...</span>
+      </section>
+
+      <section id="planCatalog" class="plan-catalog">
+        <article class="panel"><p class="muted">Loading membership plans...</p></article>
+      </section>
+
+      <section class="plan-workspace">
+        <div class="panel">
+          <p class="eyebrow">PLAN MANAGEMENT</p>
+          <h2 id="planFormHeading">Create a membership plan</h2>
+          <p class="muted">Set the plan name, duration, fee and benefits.</p>
+
+          <form id="planForm" class="plan-form">
+            <div class="form-group">
+              <label for="plan_name">Plan name *</label>
+              <input id="plan_name" name="plan_name" maxlength="100" placeholder="e.g. Elite Annual" required>
+            </div>
+            <div class="form-group">
+              <label for="duration_months">Duration (months) *</label>
+              <input id="duration_months" name="duration_months" type="number" min="1" max="120" placeholder="e.g. 12" required>
+            </div>
+            <div class="form-group">
+              <label for="fee">Membership fee (₹) *</label>
+              <input id="fee" name="fee" type="number" min="0" step="0.01" placeholder="e.g. 12000" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Plan description</label>
+              <textarea id="description" name="description" maxlength="2000" placeholder="Describe the plan benefits..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button id="savePlanBtn" type="submit" class="primary-button">Create Plan</button>
+              <button id="cancelPlanEdit" type="button" class="secondary-button" hidden>Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="panel">
+          <p class="eyebrow">PLAN DESIGN</p>
+          <h2>Built around your goals.</h2>
+          <img src="/images/gym-facility.jpg" alt="Gym facilities" style="width:100%;height:190px;object-fit:cover;border-radius:8px;margin:15px 0">
+          <p class="muted">Create plans that fit beginners, consistent members and dedicated athletes. Keep the duration and pricing clear for every member.</p>
+          <div class="status-pill">Flexible plan management</div>
+        </aside>
+      </section>
+
+      <section class="panel plan-table-panel">
+        <div class="plan-table-heading">
+          <p class="eyebrow">COMPLETE DATABASE</p>
+          <h2>All membership plans</h2>
+          <p>Review, edit or remove plans that are no longer needed.</p>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>PLAN ID</th><th>PLAN</th><th>DURATION</th><th>FEE</th><th>DESCRIPTION</th><th>ACTIONS</th></tr></thead>
+            <tbody id="planTableBody"><tr><td colspan="6" class="loading-cell">Loading plans...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="page-footer"><span>© 2026 INDU ELITE FITNESS</span><span>STRENGTH · DISCIPLINE · EXCELLENCE</span></footer>
+    </main>
+  </div>
+  <script src="/js/plans.js"></script>
+</body>
+</html>

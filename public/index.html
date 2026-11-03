@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INDU ELITE FITNESS | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-mark">IE</span>
+        <span>
+          <strong>INDU ELITE</strong>
+          <small>FITNESS CLUB</small>
+        </span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-links">
+        <a class="nav-link active" href="/">▦ &nbsp; Dashboard</a>
+        <a class="nav-link" href="/members.html">♙ &nbsp; Members</a>
+        <a class="nav-link" href="/plans.html">✦ &nbsp; Membership Plans</a>
+        <a class="nav-link" href="/subscriptions.html">▤ &nbsp; Subscriptions</a>
+        <a class="nav-link" href="/trainers.html">♧ &nbsp; Trainers</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-mini">
+          <span class="status-dot"></span>
+          <div>
+            <strong>System Online</strong>
+            <small>Gym management portal</small>
+          </div>
+        </div>
+        <p>STRENGTH · DISCIPLINE · EXCELLENCE</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">INDU ELITE FITNESS / OVERVIEW</p>
+          <h1>Dashboard</h1>
+        </div>
+        <div class="admin-chip">
+          <span class="admin-avatar">IE</span>
+          <span><strong>Administrator</strong><small>Management portal</small></span>
+        </div>
+      </header>
+
+      <section class="hero-banner">
+        <img src="/images/gym-hero.jpg" alt="Premium gym interior">
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+          <span class="hero-tag">YOUR CLUB. YOUR LEGACY.</span>
+          <h2>Build strength.<br>Manage excellence.</h2>
+          <p>One powerful space to manage your fitness community.</p>
+          <a href="/members.html" class="gold-button">Explore Members <span>↗</span></a>
+        </div>
+        <div class="hero-note">
+          <span class="status-dot"></span>
+          PREMIUM FITNESS MANAGEMENT
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <div>
+          <p class="eyebrow">AT A GLANCE</p>
+          <h2>Club overview</h2>
+        </div>
+        <span class="live-label"><span class="status-dot"></span> Live database</span>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total Members</span><span class="stat-icon">♙</span></div>
+          <strong id="totalMembers" class="stat-number">—</strong>
+          <p>Registered club members</p>
+          <div class="stat-line"><span style="width:80%"></span></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Membership Plans</span><span class="stat-icon">✦</span></div>
+          <strong id="totalPlans" class="stat-number">—</strong>
+          <p>Available fitness packages</p>
+          <div class="stat-line"><span style="width:60%"></span></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Subscriptions</span><span class="stat-icon">▤</span></div>
+          <strong id="totalSubscriptions" class="stat-number">—</strong>
+          <p>Recorded subscriptions</p>
+          <div class="stat-line"><span style="width:70%"></span></div>
+        </article>
+        <article class="stat-card highlight-stat">
+          <div class="stat-top"><span>Club Standard</span><span class="stat-icon">✧</span></div>
+          <strong class="stat-number">ELITE</strong>
+          <p>Strength · Discipline · Excellence</p>
+          <div class="elite-label">PREMIUM EXPERIENCE</div>
+        </article>
+      </section>
+
+      <section class="feature-grid">
+        <article class="feature-card training-card">
+          <img src="/images/fitness-training.jpg" alt="Fitness training session">
+          <div class="feature-overlay">
+            <span>THE ELITE STANDARD</span>
+            <h3>Every member.<br>Every milestone.</h3>
+          </div>
+        </article>
+        <article class="feature-card reception-card">
+          <img src="/images/gym-reception.jpg" alt="Gym reception">
+          <div class="reception-content">
+            <p class="eyebrow">MEMBER EXPERIENCE</p>
+            <h3>Great fitness<br>starts with great care.</h3>
+            <a href="/subscriptions.html" class="text-link">View subscriptions ↗</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-heading recent-heading">
+        <div>
+          <p class="eyebrow">DATABASE RECORDS</p>
+          <h2>Recent members</h2>
+        </div>
+        <a class="text-link" href="/members.html">View all members ↗</a>
+      </section>
+
+      <div id="pageMessage" class="page-message" role="status" aria-live="polite" hidden></div>
+
+      <section class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>MEMBER</th>
+                <th>EMAIL</th>
+                <th>PHONE</th>
+                <th>JOIN DATE</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="recentMembers">
+              <tr><td colspan="5" class="loading-cell">Connecting to your club database...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>© 2026 INDU ELITE FITNESS</span>
+        <span>STRENGTH · DISCIPLINE · EXCELLENCE</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

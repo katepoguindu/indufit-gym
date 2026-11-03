@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Members | INDU ELITE FITNESS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .members-hero {
+      min-height: 235px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: end;
+      padding: 28px;
+      border: 1px solid rgba(198,166,107,.25);
+      border-radius: 14px;
+      background: #1b2a20;
+    }
+
+    .members-hero > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+
+    .members-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,rgba(12,20,14,.97),rgba(12,20,14,.65) 55%,rgba(12,20,14,.1));
+    }
+
+    .members-hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 470px;
+    }
+
+    .members-hero h2 {
+      margin: 8px 0;
+      font: 500 clamp(30px,4vw,43px)/1.15 "Playfair Display",serif;
+    }
+
+    .members-hero p {
+      color: #d2dbd1;
+      max-width: 390px;
+    }
+
+    .member-workspace {
+      display: grid;
+      grid-template-columns: minmax(280px,.75fr) minmax(0,1.5fr);
+      gap: 18px;
+      margin-top: 23px;
+      align-items: start;
+    }
+
+    .member-form-panel {
+      position: sticky;
+      top: 15px;
+    }
+
+    .member-form-panel h2 {
+      font-size: 25px;
+    }
+
+    .form-intro {
+      margin: -8px 0 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .member-form-panel form {
+      display: grid;
+      gap: 2px;
+    }
+
+    .members-panel {
+      padding: 0;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .members-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .members-panel-head h2 {
+      margin: 0;
+      font: 500 24px "Playfair Display",serif;
+    }
+
+    .member-count {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .search-box {
+      width: min(100%,230px);
+      min-height: 40px;
+      padding: 9px 12px;
+      color: var(--ivory);
+      background: #111a14;
+      border: 1px solid #344338;
+      border-radius: 7px;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--green);
+    }
+
+    .member-name-cell {
+      min-width: 155px;
+    }
+
+    .member-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .member-avatar {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #304332;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .member-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .member-person strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .member-person small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 7px;
+    }
+
+    .action-btn {
+      padding: 7px 10px;
+      color: var(--green);
+      background: #25352a;
+      border: 1px solid #3c5140;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .action-btn.delete {
+      color: #ffb9ab;
+      background: #382521;
+      border-color: #5b3730;
+    }
+
+    .empty-state {
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .member-message {
+      margin-top: 15px;
+      padding: 12px 14px;
+      border-radius: 7px;
+      font-size: 12px;
+    }
+
+    .member-message.success {
+      color: var(--green);
+      background: #203629;
+      border: 1px solid #365b40;
+    }
+
+    .member-message.error {
+      color: #ffc0b2;
+      background: #382521;
+      border: 1px solid #684137;
+    }
+
+    .member-message[hidden] {
+      display: none;
+    }
+
+    .form-submit-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+
+    .form-submit-row button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .required-note {
+      color: var(--muted);
+      font-size: 10px;
+      margin: 0 0 13px;
+    }
+
+    @media(max-width:1000px) {
+      .member-workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .member-form-panel {
+        position: static;
+      }
+    }
+
+    @media(max-width:600px) {
+      .members-hero {
+        min-height: 215px;
+        padding: 20px;
+      }
+
+      .members-panel-head {
+        align-items: stretch;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-mark">IE</span>
+        <span>
+          <strong>INDU ELITE</strong>
+          <small>FITNESS CLUB</small>
+        </span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav class="nav-links">
+        <a class="nav-link" href="/">▦ &nbsp; Dashboard</a>
+        <a class="nav-link active" href="/members.html">♙ &nbsp; Members</a>
+        <a class="nav-link" href="/plans.html">✦ &nbsp; Membership Plans</a>
+        <a class="nav-link" href="/subscriptions.html">▤ &nbsp; Subscriptions</a>
+        <a class="nav-link" href="/trainers.html">♧ &nbsp; Trainers</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-mini">
+          <span class="status-dot"></span>
+          <div>
+            <strong>System Online</strong>
+            <small>Gym management portal</small>
+          </div>
+        </div>
+        <p>STRENGTH · DISCIPLINE · EXCELLENCE</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">INDU ELITE FITNESS / PEOPLE</p>
+          <h1>Members</h1>
+        </div>
+        <a href="/" class="text-link">← Dashboard</a>
+      </header>
+
+      <section class="members-hero">
+        <img src="/images/fitness-training.jpg" alt="Members training at the fitness club">
+        <div class="members-hero-copy">
+          <span class="hero-tag">THE HEART OF OUR CLUB</span>
+          <h2>Every member has a story.</h2>
+          <p>Manage your fitness community, maintain member records and keep every detail organised.</p>
+        </div>
+      </section>
+
+      <div id="memberMessage" class="member-message" role="status" aria-live="polite" hidden></div>
+
+      <section class="member-workspace">
+
+        <div>
+          <section class="panel member-form-panel">
+            <p class="eyebrow">MEMBER REGISTRATION</p>
+            <h2 id="formHeading">Add a member</h2>
+            <p class="form-intro">Create and maintain club member records.</p>
+            <p class="required-note">* Name and email are required.</p>
+
+            <form id="memberForm">
+
+              <div class="form-group">
+                <label for="name">Full name *</label>
+                <input id="name" name="name" type="text" maxlength="100" placeholder="Enter member name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email address *</label>
+                <input id="email" name="email" type="email" maxlength="100" placeholder="member@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" maxlength="15" placeholder="Enter phone number">
+              </div>
+
+              <div class="form-group">
+                <label for="join_date">Joining date</label>
+                <input id="join_date" name="join_date" type="date">
+              </div>
+
+              <div class="form-group">
+                <label for="status">Member status</label>
+                <select id="status" name="status">
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+
+              <div class="form-submit-row">
+                <button id="saveMemberBtn" type="submit" class="primary-button">Add Member</button>
+                <button id="cancelEditBtn" type="button" class="secondary-button" hidden>Cancel Edit</button>
+              </div>
+
+            </form>
+          </section>
+        </div>
+
+        <section class="panel members-panel">
+          <div class="members-panel-head">
+            <div>
+              <p class="eyebrow">MEMBER DIRECTORY</p>
+              <h2>Club members</h2>
+              <div id="memberCount" class="member-count">Loading records...</div>
+            </div>
+
+            <input
+              id="memberSearch"
+              class="search-box"
+              type="search"
+              placeholder="Search name, email or phone..."
+              aria-label="Search members"
+            >
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>MEMBER</th>
+                  <th>PHONE</th>
+                  <th>JOIN DATE</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+
+              <tbody id="membersTableBody">
+                <tr>
+                  <td colspan="5" class="empty-state">Loading members...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </section>
+
+      <footer class="page-footer">
+        <span>© 2026 INDU ELITE FITNESS</span>
+        <span>STRENGTH · DISCIPLINE · EXCELLENCE</span>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="/js/members.js"></script>
+</body>
+</html>

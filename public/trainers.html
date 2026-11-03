@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INDU ELITE FITNESS | Trainers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .trainers-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            margin: 8px 0 26px;
+        }
+
+        .trainers-intro h2 {
+            margin: 5px 0 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(25px, 3vw, 34px);
+            color: #F6F1E7;
+        }
+
+        .trainers-intro p {
+            margin: 0;
+            color: #AAB8AD;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .trainer-count {
+            flex-shrink: 0;
+            padding: 10px 14px;
+            border: 1px solid #34483B;
+            border-radius: 8px;
+            background: #18271F;
+            color: #B8E5A4;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trainer-banner {
+            position: relative;
+            min-height: 210px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            border: 1px solid #344238;
+            border-radius: 14px;
+            background: #19271F;
+        }
+
+        .trainer-banner img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.46;
+        }
+
+        .trainer-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(13, 24, 18, 0.98) 0%,
+                rgba(13, 24, 18, 0.82) 48%,
+                rgba(13, 24, 18, 0.2) 100%
+            );
+        }
+
+        .trainer-banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            padding: 30px;
+        }
+
+        .trainer-banner-content .eyebrow {
+            color: #C6A66B;
+        }
+
+        .trainer-banner-content h2 {
+            margin: 10px 0;
+            color: #F6F1E7;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(23px, 3vw, 32px);
+            line-height: 1.25;
+        }
+
+        .trainer-banner-content p {
+            margin: 0;
+            color: #D1D9D0;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .trainer-section-heading {
+            margin: 0 0 16px;
+        }
+
+        .trainer-section-heading h2 {
+            margin: 4px 0;
+            color: #F6F1E7;
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+        }
+
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .trainer-card {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid #304237;
+            border-radius: 12px;
+            background: #17251D;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-3px);
+            border-color: #64825D;
+        }
+
+        .trainer-photo {
+            position: relative;
+            height: 185px;
+            overflow: hidden;
+            background: #223329;
+        }
+
+       .trainer-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    transition: transform 0.3s ease;
+}
+        .trainer-card:hover .trainer-photo img {
+            transform: scale(1.04);
+        }
+
+        .trainer-photo-label {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            padding: 6px 9px;
+            border: 1px solid rgba(198, 166, 107, 0.45);
+            border-radius: 5px;
+            background: rgba(16, 29, 21, 0.9);
+            color: #E5C98F;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .trainer-details {
+            padding: 17px;
+        }
+
+        .trainer-details h3 {
+            margin: 0 0 5px;
+            color: #F6F1E7;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .trainer-specialty {
+            margin: 0 0 14px;
+            color: #C6A66B;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trainer-description {
+            min-height: 42px;
+            margin: 0 0 16px;
+            color: #AAB8AD;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .trainer-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 17px;
+        }
+
+        .trainer-tag {
+            padding: 6px 8px;
+            border: 1px solid #34483B;
+            border-radius: 5px;
+            color: #C7D4C8;
+            font-size: 10px;
+        }
+
+        .trainer-assign-note {
+            display: block;
+            padding-top: 12px;
+            border-top: 1px solid #304237;
+            color: #B8E5A4;
+            font-size: 11px;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+
+        .trainer-assign-note:hover {
+            color: #E5C98F;
+        }
+
+        .trainer-note {
+            margin-top: 22px;
+            padding: 15px 17px;
+            border: 1px solid #34483B;
+            border-left: 3px solid #C6A66B;
+            border-radius: 8px;
+            background: #17251D;
+            color: #B8C5B9;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .trainer-note strong {
+            color: #F6F1E7;
+        }
+
+        @media (max-width: 1100px) {
+            .trainer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .trainers-intro {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .trainer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trainer-photo {
+                height: 210px;
+            }
+
+            .trainer-banner-content {
+                padding: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a class="brand" href="/">
+            <span class="brand-mark">IE</span>
+            <span>
+                <strong>INDU ELITE</strong>
+                <small>FITNESS CLUB</small>
+            </span>
+        </a>
+
+        <p class="nav-label">WORKSPACE</p>
+
+        <nav class="nav-links">
+            <a class="nav-link" href="/">▦ &nbsp; Dashboard</a>
+            <a class="nav-link" href="/members.html">♙ &nbsp; Members</a>
+            <a class="nav-link" href="/plans.html">✦ &nbsp; Membership Plans</a>
+            <a class="nav-link" href="/subscriptions.html">▤ &nbsp; Subscriptions</a>
+            <a class="nav-link active" href="/trainers.html">♧ &nbsp; Trainers</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-mini">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>System Online</strong>
+                    <small>Gym management portal</small>
+                </div>
+            </div>
+            <p>STRENGTH · DISCIPLINE · EXCELLENCE</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">INDU ELITE FITNESS / TEAM</p>
+                <h1>Our Trainers</h1>
+            </div>
+
+            <div class="admin-chip">
+                <span class="admin-avatar">IE</span>
+                <span>
+                    <strong>Administrator</strong>
+                    <small>Management portal</small>
+                </span>
+            </div>
+        </header>
+
+        <section class="trainers-intro">
+            <div>
+                <p class="eyebrow">MEET THE EXPERTS</p>
+                <h2>Stronger with the right team.</h2>
+                <p>
+                    Meet the fitness professionals supporting your
+                    training journey at INDU ELITE FITNESS.
+                </p>
+            </div>
+
+            <span class="trainer-count">3 TRAINER PROFILES</span>
+        </section>
+
+        <section class="trainer-banner">
+            <img
+                src="/images/trainer-coaching.jpg"
+                alt="Fitness training at INDU ELITE FITNESS"
+                loading="lazy"
+            >
+
+            <div class="trainer-banner-content">
+                <p class="eyebrow">THE ELITE STANDARD</p>
+                <h2>Expert guidance.<br>Consistent progress.</h2>
+                <p>
+                    Build healthy habits, improve your technique and
+                    work towards your fitness goals with a structured plan.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <div class="trainer-section-heading">
+                <p class="eyebrow">YOUR FITNESS TEAM</p>
+                <h2>Meet our trainers</h2>
+            </div>
+
+            <div class="trainer-grid">
+
+                <article class="trainer-card">
+                    <div class="trainer-photo">
+                        <img
+                            src="/images/member-female.jpg"
+                            alt="Ananya Das - Fitness Trainer"
+                            loading="lazy"
+                        >
+                        <span class="trainer-photo-label">FITNESS COACH</span>
+                    </div>
+
+                    <div class="trainer-details">
+                        <h3>Ananya Das</h3>
+                        <p class="trainer-specialty">Strength & Conditioning</p>
+
+                        <p class="trainer-description">
+                            Focuses on structured workouts, exercise
+                            technique and consistent fitness progress.
+                        </p>
+
+                        <div class="trainer-tags">
+                            <span class="trainer-tag">Strength Training</span>
+                            <span class="trainer-tag">Workout Plans</span>
+                        </div>
+
+                        <a class="trainer-assign-note" href="/subscriptions.html">
+                            Assign through Subscriptions ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="trainer-card">
+                    <div class="trainer-photo">
+                        <img
+                            src="/images/rohit-mehta.jpg"
+                            alt="Rohit Mehta - Personal Fitness Trainer"
+                            loading="lazy"
+                        >
+                        <span class="trainer-photo-label">PERSONAL TRAINING</span>
+                    </div>
+
+                    <div class="trainer-details">
+                        <h3>Rohit Mehta</h3>
+                        <p class="trainer-specialty">Personal Fitness Training</p>
+
+                        <p class="trainer-description">
+                            Supports members with exercise routines,
+                            training consistency and fitness fundamentals.
+                        </p>
+
+                        <div class="trainer-tags">
+                            <span class="trainer-tag">Personal Training</span>
+                            <span class="trainer-tag">Fitness Basics</span>
+                        </div>
+
+                        <a class="trainer-assign-note" href="/subscriptions.html">
+                            Assign through Subscriptions ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="trainer-card">
+                    <div class="trainer-photo">
+                        <img
+                            src="/images/member-male.jpg"
+                            alt="Vikram Singh - Gym Trainer"
+                            loading="lazy"
+                        >
+                        <span class="trainer-photo-label">GYM TRAINING</span>
+                    </div>
+
+                    <div class="trainer-details">
+                        <h3>Vikram Singh</h3>
+                        <p class="trainer-specialty">Gym & Workout Guidance</p>
+
+                        <p class="trainer-description">
+                            Helps members understand gym equipment,
+                            workout routines and safe exercise practices.
+                        </p>
+
+                        <div class="trainer-tags">
+                            <span class="trainer-tag">Gym Equipment</span>
+                            <span class="trainer-tag">Workout Guidance</span>
+                        </div>
+
+                        <a class="trainer-assign-note" href="/subscriptions.html">
+                            Assign through Subscriptions ↗
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <div class="trainer-note">
+            <strong>Note:</strong> These are display profiles for the
+            project interface. Trainer names and specializations shown
+            here are sample details. Assign a trainer to a member through
+            the Subscriptions page.
+        </div>
+
+        <footer class="page-footer">
+            <span>© 2026 INDU ELITE FITNESS</span>
+            <span>STRENGTH · DISCIPLINE · EXCELLENCE</span>
+        </footer>
+
+    </main>
+</div>
+</body>
+</html>

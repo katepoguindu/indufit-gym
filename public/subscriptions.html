@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions | INDU ELITE FITNESS</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .subscription-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.5fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .subscription-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .subscription-form input,
+        .subscription-form select,
+        .subscription-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: white;
+            font: inherit;
+            margin-top: 7px;
+        }
+
+        .subscription-form label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .subscription-form textarea {
+            resize: vertical;
+            min-height: 75px;
+        }
+
+        .subscription-heading {
+            margin-bottom: 20px;
+        }
+
+        .subscription-heading h2 {
+            margin: 0 0 6px;
+        }
+
+        .subscription-heading p,
+        .field-note {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .subscription-message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .subscription-message.show {
+            display: block;
+        }
+
+        .subscription-message.success {
+            background: #e3f2e9;
+            color: #185b3b;
+        }
+
+        .subscription-message.error {
+            background: #fbe8e6;
+            color: #982d26;
+        }
+
+        .subscription-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .subscription-table th,
+        .subscription-table td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .subscription-table th {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .subscription-table td {
+            color: #24352f;
+        }
+
+        .subscription-table .empty-row {
+            text-align: center;
+            padding: 28px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 900px) {
+            .subscription-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+/* ===== SUBSCRIPTIONS VISIBILITY FIX ===== */
+
+.subscription-layout .panel {
+    color: #F6F1E7;
+}
+
+.subscription-heading h2 {
+    color: #F6F1E7;
+}
+
+.subscription-heading p,
+.subscription-layout .muted,
+.field-note {
+    color: #C8D5CD;
+}
+
+.subscription-table th {
+    color: #E5C98A;
+    background: #20352C;
+}
+
+.subscription-table td {
+    color: #F6F1E7;
+    border-bottom: 1px solid #35483E;
+}
+
+.subscription-table tbody tr:hover {
+    background: #20352C;
+}
+
+.subscription-table .empty-row {
+    color: #C8D5CD;
+}
+
+.subscription-message {
+    border: 1px solid transparent;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.subscription-message.success {
+    background: #D9FBE7;
+    color: #075C36;
+    border-color: #76D69D;
+}
+
+.subscription-message.error {
+    background: #FDE8E7;
+    color: #982D26;
+    border-color: #F3AAA5;
+}
+
+.subscription-table .status-pill {
+    color: #F6F1E7;
+    font-weight: 600;
+}
+
+.subscription-form input:focus,
+.subscription-form select:focus {
+    outline: 2px solid #C6A66B;
+    outline-offset: 2px;
+}
+
+/* ===== PREMIUM SUBSCRIPTION FORM & TABLE ===== */
+
+.subscription-layout .panel {
+    background: #17241D;
+    border: 1px solid #304137;
+    border-radius: 14px;
+    padding: 22px;
+    color: #F4F0E7;
+    overflow: hidden;
+}
+
+.subscription-heading h2 {
+    color: #F4F0E7;
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.subscription-heading p,
+.subscription-layout .muted,
+.field-note {
+    color: #9DADA2;
+}
+
+/* Form fields like Members page */
+
+.subscription-form {
+    gap: 18px;
+}
+
+.subscription-form label {
+    display: block;
+    color: #C4CEC6;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.subscription-form input,
+.subscription-form select,
+.subscription-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px;
+    margin-top: 9px;
+    color: #F4F0E7;
+    background: #111B15;
+    border: 1px solid #35483B;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 14px;
+}
+
+.subscription-form select {
+    color-scheme: dark;
+}
+
+.subscription-form input::placeholder,
+.subscription-form textarea::placeholder {
+    color: #718277;
+}
+
+.subscription-form input:focus,
+.subscription-form select:focus,
+.subscription-form textarea:focus {
+    outline: none;
+    border-color: #C6A66B;
+    box-shadow: 0 0 0 2px rgb(198 166 107 / 15%);
+}
+
+/* Create button */
+
+#subscriptionSubmit {
+    min-height: 44px;
+    border: 1px solid #C6A66B;
+    border-radius: 6px;
+    background: #C6A66B;
+    color: #17241D;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#subscriptionSubmit:hover {
+    background: #D8BC83;
+}
+
+#subscriptionSubmit:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+/* Records table like Members page */
+
+.subscription-layout .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.subscription-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.subscription-table thead {
+    background: #202F26;
+}
+
+.subscription-table th {
+    padding: 15px 12px;
+    color: #B8C9BD;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    border-bottom: 1px solid #35483B;
+    white-space: nowrap;
+}
+
+.subscription-table td {
+    padding: 17px 12px;
+    color: #F4F0E7;
+    font-size: 13px;
+    border-bottom: 1px solid #2D3B32;
+    vertical-align: middle;
+}
+
+.subscription-table tbody tr:hover {
+    background: #202F26;
+}
+
+.subscription-table .empty-row {
+    padding: 28px;
+    text-align: center;
+    color: #9DADA2;
+}
+
+/* Payment status badges */
+
+.payment-badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.payment-badge.paid {
+    color: #83E3A0;
+    background: #203A2A;
+    border-color: #3C6045;
+}
+
+.payment-badge.pending {
+    color: #FF9991;
+    background: #402624;
+    border-color: #75403A;
+}
+
+@media (max-width: 900px) {
+    .subscription-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+</head>
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">IE</div>
+            <div>
+                <strong>INDU ELITE</strong>
+                <span>FITNESS CLUB</span>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="nav-links">
+            <a class="nav-link" href="/">▦ Dashboard</a>
+            <a class="nav-link" href="/members.html">♙ Members</a>
+            <a class="nav-link" href="/plans.html">✦ Membership Plans</a>
+            <a class="nav-link active" href="/subscriptions.html">▤ Subscriptions</a>
+            <a class="nav-link" href="/trainers.html">♧ Trainers</a>
+        </nav>
+
+        
+<div class="sidebar-bottom">
+    <div class="sidebar-mini">
+        <span class="status-dot"></span>
+        <div>
+            <strong>System Online</strong>
+            <small>Gym management portal</small>
+        </div>
+    </div>
+    <p>STRENGTH · DISCIPLINE · EXCELLENCE</p>
+</div>
+
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <div class="eyebrow">MEMBERSHIP MANAGEMENT</div>
+                <h1>Subscriptions</h1>
+                <p class="muted">Connect members with their fitness plans.</p>
+            </div>
+        </header>
+
+        <section class="subscription-layout">
+
+            <div class="panel">
+                <div class="subscription-heading">
+                    <h2>New Subscription</h2>
+                    <p>Assign a plan and track its payment status.</p>
+                </div>
+
+                <div id="subscriptionMessage" class="subscription-message"
+                     role="status" aria-live="polite"></div>
+
+                <form id="subscriptionForm" class="subscription-form">
+                    <div>
+                        <label for="member_id">Select Member *</label>
+                        <select id="member_id" name="member_id" required>
+                            <option value="">Loading members...</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="plan_id">Membership Plan *</label>
+                        <select id="plan_id" name="plan_id" required>
+                            <option value="">Loading plans...</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="trainer_name">Trainer Name</label>
+                        <input id="trainer_name" name="trainer_name"
+                               type="text" maxlength="100"
+                               placeholder="Enter trainer name">
+                    </div>
+
+                    <div>
+                        <label for="start_date">Start Date *</label>
+                        <input id="start_date" name="start_date"
+                               type="date" required>
+                    </div>
+
+                    <div>
+                        <label for="end_date">End Date *</label>
+                        <input id="end_date" name="end_date"
+                               type="date" required>
+                        <p class="field-note">Choose an end date on or after the start date.</p>
+                    </div>
+
+                    <div>
+                        <label for="payment_status">Payment Status *</label>
+                        <select id="payment_status" name="payment_status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="primary-button"
+                            id="subscriptionSubmit">
+                        Create Subscription
+                    </button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="subscription-heading">
+                    <h2>Subscription Records</h2>
+                    <p>Current member plans and payment details.</p>
+                </div>
+
+                <div id="tableMessage" class="muted">Loading subscriptions...</div>
+
+                <div class="table-scroll">
+                    <table class="subscription-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Member</th>
+                                <th>Plan</th>
+                                <th>Trainer</th>
+                                <th>Dates</th>
+                                <th>Payment</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscriptionTableBody">
+                            <tr>
+                                <td colspan="6" class="empty-row">Loading records...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            INDU ELITE FITNESS · Membership Management
+        </footer>
+    </main>
+</div>
+
+<script src="/js/subscriptions.js"></script>
+</body>
+</html>
